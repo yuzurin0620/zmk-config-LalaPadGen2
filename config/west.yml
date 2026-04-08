@@ -4,6 +4,8 @@ manifest:
       url-base: https://github.com/zmkfirmware
     - name: ShiniNet
       url-base: https://github.com/ShiniNet/
+    - name: eswai
+      url-base: https://github.com/eswai
     - name: caksoylar
       url-base: https://github.com/caksoylar
   projects:
@@ -16,6 +18,9 @@ manifest:
       revision: main
     - name: zmk-easy-charge-indicator
       remote: ShiniNet
+      revision: main
+    - name: zmk-naginata
+      remote: eswai
       revision: main
     - name: zmk-rgbled-widget
       remote: caksoylar
