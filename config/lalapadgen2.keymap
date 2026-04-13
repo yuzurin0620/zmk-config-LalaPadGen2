@@ -45,6 +45,15 @@
             #binding-cells = <0>;
             bindings = <&mo 1>, <&mo 2>;
         };
+
+        /* REMAP_LALAPAD_TD_BEGIN */
+        td0: td0 {
+            compatible = "zmk,behavior-tap-dance-triple";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp J>, <&kp LEFT_CONTROL>, <&kp Z>;
+        };
+        /* REMAP_LALAPAD_TD_END */
     };
 
     macros {
@@ -59,6 +68,39 @@
             #binding-cells = <0>;
             bindings = <&macro_tap &kp LANGUAGE_2 &kp INTERNATIONAL_5 &to DEFAULT_LAYER>;
         };
+
+        /* REMAP_LALAPAD_MACRO_BEGIN */
+        mc0: mc0 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press &kp LEFT_CONTROL>
+                     , <&macro_press &kp LEFT_ALT>
+                     , <&macro_wait_time 50>
+                     , <&macro_tap &kp SLASH>
+                     , <&macro_wait_time 50>
+                     , <&macro_release &kp LEFT_CONTROL>
+                     , <&macro_release &kp LEFT_ALT>
+                     , <&macro_wait_time 2000>
+                     , <&macro_press &kp LEFT_CONTROL>
+                     , <&macro_tap &kp V>
+                     , <&macro_wait_time 30>
+                     , <&macro_release &kp LEFT_CONTROL>
+                     ;
+        };
+
+        mc1: mc1 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press &kp LWIN>
+                     , <&macro_tap &kp X>
+                     , <&macro_release &kp LWIN>
+                     , <&macro_wait_time 500>
+                     , <&macro_tap &kp U>
+                     , <&macro_wait_time 100>
+                     , <&macro_tap &kp S>
+                     ;
+        };
+        /* REMAP_LALAPAD_MACRO_END */
     };
 
     combos {
@@ -68,24 +110,41 @@
             bindings = <&kp ESCAPE>;
             key-positions = <0 1>;
         };
-
         COMBO_TAB {
             bindings = <&kp TAB>;
             key-positions = <10 11>;
         };
-
         COMBO_NG_ON {
             timeout-ms = <300>;
-            key-positions = <15 16>;
             bindings = <&ng_on>;
+            key-positions = <15 16>;
             layers = <DEFAULT_LAYER>;
         };
-
         COMBO_NG_OFF {
             timeout-ms = <300>;
-            key-positions = <13 14>;
             bindings = <&ng_off>;
+            key-positions = <13 14>;
             layers = <DEFAULT_LAYER NAGINATA_LAYER>;
+        };
+        COMBO_5 {
+            bindings = <&kp QMARK>;
+            key-positions = <3 4>;
+            layers = <0>;
+        };
+        COMBO_6 {
+            bindings = <&kp EXCL>;
+            key-positions = <2 3>;
+            layers = <0>;
+        };
+        COMBO_7 {
+            bindings = <&kp LANGUAGE_2>;
+            key-positions = <23 24>;
+            layers = <0>;
+        };
+        COMBO_8 {
+            bindings = <&kp LANGUAGE_1>;
+            key-positions = <25 26>;
+            layers = <0>;
         };
     };
 
@@ -95,75 +154,70 @@
         DEFAULT_LAYER {
             display-name = "Default";
             bindings = <
-&kp Q              &kp W      &kp E         &kp R      &kp T                                     &kp Y      &kp U     &kp I           &kp O           &kp P
-&kp A              &kp S      &kp D         &kp F      &kp G                                     &kp H      &kp J     &kp K           &kp L           &mt2 EQUAL MINUS
-&mt2 LEFT_SHIFT Z  &kp X      &kp C         &kp V      &kp B                                     &kp N      &kp M     &kp COMMA       &kp PERIOD      &kp SLASH
-&kp LCTRL          &kp LWIN   &kp LEFT_ALT  &mo 1      &kp SPACE  &kp LEFT_SHIFT  &kp BACKSPACE  &kp ENTER  &mo 2     &kp LANGUAGE_2  &kp LANGUAGE_1  &kp BACKSLASH
-                   &none      &kp RIGHT     &kp DOWN   &kp LEFT   &kp UP          &kp UP         &kp LEFT   &kp DOWN  &kp RIGHT       &none
-&mkp LCLK          &mkp RCLK  &mkp MCLK                                                                               &mkp LCLK       &mkp RCLK       &mkp MCLK
-&mkp MB4           &mkp MB5   &kp LG(TAB)   &kp LG(D)  &kp LCTRL                                 &mkp MB4   &mkp MB5  &kp LG(TAB)     &kp LG(D)       &kp LCTRL
+            &kp Q  &kp L  &kp E  &kp COMMA  &kp PERIOD  &kp H  &kp W  &kp R  &kp Y  &kp F
+            &kp U  &kp I  &kp A  &lt 3 O  &kp MINUS  &kp K  &kp T  &kp N  &kp S  &kp P
+            &td0  &kp X  &kp C  &kp V  &lt 1 SLASH  &kp G  &kp D  &kp M  &kp Z  &kp B
+            &kp LWIN  &kp F2  &kp LWIN  &kp LEFT_CONTROL  &kp LEFT_SHIFT  &kp LEFT_ALT  &lt 1 SPACE  &lt 3 ENTER  &kp BACKSPACE  &kp LANGUAGE_2  &kp LANGUAGE_1  &kp BACKSLASH
+            &sk LS(LA(LCTRL))  &sk LA(LSHIFT)  &sk LS(LA(LCTRL))  &sk LS(LCTRL)  &sk LA(LCTRL)  &kp UP  &kp LEFT  &kp DOWN  &kp RIGHT  &none
+            &mkp LCLK  &mkp RCLK  &mkp MCLK  &mkp LCLK  &mkp RCLK  &mkp MCLK
+            &mkp MB4  &mkp MB5  &kp LG(TAB)  &kp LG(D)  &kp LCTRL  &mkp MB5  &mkp MB4  &kp LG(TAB)  &kp LG(D)  &kp LCTRL
             >;
         };
 
         SECONDARY_LAYER {
             display-name = "secondary_layer";
             bindings = <
-&kp NUMBER_1      &kp NUMBER_2       &kp NUMBER_3  &kp NUMBER_4  &kp N5                    &kp KP_NUMLOCK    &kp KP_NUMBER_7    &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp KP_PLUS
-&kp NUMBER_6      &kp N7             &kp N8        &kp N9        &kp N0                    &trans            &kp KP_NUMBER_4    &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp KP_MINUS
-&kp F6            &kp F7             &kp F8        &kp F9        &kp F10                   &trans            &kp KP_NUMBER_1    &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp KP_ASTERISK
-&trans            &trans             &trans        &trans        &trans   &trans  &kp DEL  &trans            &trans             &kp KP_NUMBER_0  &kp KP_DOT       &kp KP_DIVIDE
-                  &trans             &trans        &trans        &trans   &trans  &trans   &trans            &trans             &trans           &trans
-&trans            &trans             &trans                                                                                     &trans           &trans           &trans
-&kp LC(LG(LEFT))  &kp LC(LG(RIGHT))  &trans        &trans        &trans                    &kp LC(LG(LEFT))  &kp LC(LG(RIGHT))  &trans           &trans           &trans
+            &kp KP_ASTERISK  &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp KP_PLUS  &kp F1  &kp F2  &kp F3  &kp F4  &kp F5
+            &kp KP_DIVIDE  &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp KP_MINUS  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10
+            &kp KP_NUMLOCK  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &trans  &kp F11  &kp F12  &kp F13  &kp F14  &kp F15
+            &trans  &kp SEMI  &kp COLON  &kp KP_NUMBER_0  &kp KP_DOT  &kp KP_EQUAL  &kp DEL  &trans  &trans  &kp KP_NUMBER_0  &kp KP_DOT  &kp KP_DIVIDE
+            &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+            &trans  &trans  &trans  &trans  &trans  &trans
+            &kp LC(LG(LEFT))  &kp LC(LG(RIGHT))  &trans  &trans  &trans  &kp LC(LG(LEFT))  &kp LC(LG(RIGHT))  &trans  &trans  &trans
             >;
         };
 
         TERTIARY_LAYER {
             display-name = "tertiary_layer";
             bindings = <
-&kp EXCLAMATION  &kp AT_SIGN    &kp HASH      &kp DOLLAR            &kp PERCENT                            &kp PAGE_UP    &kp HOME  &kp UP_ARROW    &kp END    &kp PRINTSCREEN
-&kp CARET        &kp AMPERSAND  &kp ASTERISK  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS                  &kp PAGE_DOWN  &kp LEFT  &kp DOWN_ARROW  &kp RIGHT  &kp SCROLLLOCK
-&kp GRAVE        &kp SQT        &kp SEMI      &kp LEFT_BRACKET      &kp RIGHT_BRACKET                      &trans         &mkp MB4  &trans          &mkp MB5   &kp PAUSE_BREAK
-&trans           &trans         &trans        &trans                &trans                 &trans  &trans  &trans         &trans    &trans          &trans     &trans
-                 &trans         &trans        &trans                &trans                 &trans  &trans  &trans         &trans    &trans          &trans
-&trans           &trans         &trans                                                                                              &trans          &trans     &trans
-&trans           &trans         &trans        &trans                &trans                                 &trans         &trans    &trans          &trans     &trans
+            &kp EXCLAMATION  &kp AT_SIGN  &kp HASH  &kp DOLLAR  &kp PERCENT  &kp PAGE_UP  &kp HOME  &kp UP_ARROW  &kp END  &kp PRINTSCREEN
+            &kp CARET  &kp AMPERSAND  &kp ASTERISK  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp PAGE_DOWN  &kp LEFT  &kp DOWN_ARROW  &kp RIGHT  &kp SCROLLLOCK
+            &kp GRAVE  &kp SQT  &kp SEMI  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &trans  &mkp MB4  &trans  &mkp MB5  &kp PAUSE_BREAK
+            &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+            &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+            &trans  &trans  &trans  &trans  &trans  &trans
+            &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
             >;
         };
 
         SYSTEM_LAYER {
             display-name = "system_layer";
             bindings = <
-&kp F1   &kp F2   &kp F3   &kp F4   &kp F5                   &out OUT_TOG                   &bt BT_SEL 0                   &bt BT_SEL 1                   &bt BT_SEL 2                   &bt BT_SEL 3
-&kp F6   &kp F7   &kp F8   &kp F9   &kp F10                  &sys_reset                     &bootloader                    &bt BT_CLR                     &bt BT_CLR_ALL                 &trans
-&kp F11  &kp F12  &kp F13  &kp F14  &kp F15                  &zip_dyn_scale ZDS_XY ZDS_INC  &zip_dyn_scale ZDS_XY ZDS_DEC  &zip_dyn_scale ZDS_SC ZDS_INC  &zip_dyn_scale ZDS_SC ZDS_DEC  &zip_dyn_scale ZDS_ALL ZDS_RST
-&trans   &trans   &trans   &trans   &trans   &trans  &trans  &trans                         &trans                         &trans                         &trans                         &trans
-         &trans   &trans   &trans   &trans   &trans  &trans  &trans                         &trans                         &trans                         &trans
-&trans   &trans   &trans                                                                                                   &trans                         &trans                         &trans
-&trans   &trans   &trans   &trans   &trans                   &trans                         &trans                         &trans                         &trans                         &trans
+            &kp ESCAPE  &kp F2  &kp I  &kp F4  &kp F5  &kp AMPS  &kp AT  &kp HASH  &kp LPAR  &kp RPAR
+            &kp TAB  &kp LC(S)  &kp F8  &kp O  &kp F10  &kp PRCNT  &kp LBRC  &kp RBRC  &kp CARET  &kp DQT
+            &kp LC(Z)  &kp F12  &kp LG(LS(C))  &kp LG(V)  &kp F15  &kp DLLR  &kp LPAR  &kp RPAR  &kp LT  &kp GT
+            &trans  &trans  &trans  &kp LG(LS(S))  &kp BACKSPACE  &kp ENTER  &trans  &trans  &trans  &trans  &trans  &trans
+            &trans  &trans  &mc0  &trans  &trans  &trans  &trans  &mc1  &trans  &trans
+            &trans  &trans  &trans  &trans  &trans  &trans
+            &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
             >;
         };
 
         NAGINATA_LAYER {
             display-name = "naginata";
             bindings = <
-&ng Q              &ng W      &ng E         &ng R      &ng T                                     &ng Y      &ng U     &ng I           &ng O           &ng P
-&ng A              &ng S      &ng D         &ng F      &ng G                                     &ng H      &ng J     &ng K           &ng L           &ng SEMI
-&ng Z              &ng X      &ng C         &ng V      &ng B                                     &ng N      &ng M     &ng COMMA       &ng PERIOD      &ng SLASH
-&trans             &trans     &trans        &mo 1      &ng SPACE  &trans         &trans          &ng ENTER  &mo 2     &trans          &trans          &trans
-                   &none      &trans        &trans     &trans     &trans         &trans          &trans     &trans    &trans          &none
-&trans             &trans     &trans                                                                                 &trans          &trans          &trans
-&trans             &trans     &trans        &trans     &trans                                   &trans      &trans    &trans          &trans          &trans
+            &ng Q  &ng W  &ng E  &ng R  &ng T  &ng Y  &ng U  &ng I  &ng O  &ng P
+            &ng A  &ng S  &ng D  &ng F  &ng G  &ng H  &ng J  &ng K  &ng L  &ng SEMI
+            &ng Z  &ng X  &ng C  &ng V  &ng B  &ng N  &ng M  &ng COMMA  &ng PERIOD  &ng SLASH
+            &trans  &trans  &trans  &trans  &ng SPACE  &trans  &trans  &ng SPACE  &trans  &trans  &trans  &trans
+            &none  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &none
+            &trans  &trans  &trans  &trans  &trans  &trans
+            &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
             >;
         };
     };
 
     conditional_layers {
         compatible = "zmk,conditional-layers";
-
-        Cond_Syslayer {
-            if-layers = <1 2>;
-            then-layer = <3>;
-        };
     };
 };

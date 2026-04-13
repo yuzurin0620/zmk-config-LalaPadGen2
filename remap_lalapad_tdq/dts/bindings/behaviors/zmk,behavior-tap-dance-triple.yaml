@@ -1,0 +1,12 @@
+description: Three-state tap-dance behavior
+compatible: "zmk,behavior-tap-dance-triple"
+
+include: zero_param.yaml
+
+properties:
+  bindings:
+    type: phandle-array
+    required: true
+  tapping-term-ms:
+    type: int
+    default: 200

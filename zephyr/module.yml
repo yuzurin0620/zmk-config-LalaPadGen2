@@ -1,3 +1,6 @@
 build:
   settings:
     board_root: .
+    dts_root: remap_lalapad_tdq
+  cmake: remap_lalapad_tdq
+  kconfig: remap_lalapad_tdq/Kconfig
